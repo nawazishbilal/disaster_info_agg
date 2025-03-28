@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDACS Alerts</title>
+    <script defer src="\static\script.js"></script>
+    <link rel="stylesheet" href="\static\style.css">
+</head>
+<body>
+    <div id="navbar">
+        <div class="nav-heading">Disaster Alerts</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/earthquakes_page">Earthquakes</a>
+            <a href="/weather_page">Weather</a>
+            <a href="/tweets_page">Tweets</a>
+            <a href="/alerts">View Alerts</a>
+        </div>
+    </div>
+
+    <section>
+        <h2>Filter Alerts by Date</h2>
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="start-date">
+        
+        <label for="end-date">End Date:</label>
+        <input type="date" id="end-date">
+        
+        <button onclick="fetchFilteredGDACS()">Filter Alerts</button>
+    </section>
+
+    <ul id="gdacs-list"></ul>
+
+    <!-- <button onclick="goBack()">Back to Home</button>
+
+    <script>
+        function goBack() {
+            window.location.href = "/index"; // Return to homepage
+        }
+    </script> -->
+</body>
+</html>

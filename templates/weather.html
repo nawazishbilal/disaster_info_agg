@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Alerts</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div id="navbar">
+        <div class="nav-heading">Disaster Alerts</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/earthquakes_page">Earthquakes</a>
+            <a href="/weather_page">Weather</a>
+            <a href="/tweets_page">Tweets</a>
+            <a href="/alerts">View Alerts</a>
+        </div>
+    </div>
+
+    <section>
+        <h2>Get Weather Alerts</h2>
+        <input type="text" id="city" placeholder="Enter city">
+        <button onclick="fetchWeather()">Get Weather</button>
+        <ul id="weather-list"></ul>
+    </section>
+
+    <script src="static/script.js"></script>
+</body>
+</html>
