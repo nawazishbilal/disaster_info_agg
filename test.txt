@@ -10,5 +10,3 @@ curl -X POST http://127.0.0.1:5000/disasters ^
      -H "Content-Type: application/json" ^
      -d "{\"type\": \"Earthquake\", \"location\": \"California\", \"description\": \"Magnitude 6.5 earthquake\"}"
 
-curl -H "Authorization: Bearer AAAAAAAAAAAAAAAAAAAAAITb0AEAAAAAaWbdj8svoGZQ6xEGR%2B%2BUgUNE9eA%3DmXFvAwshCEM4dvMautSxPtQvUehzFHoG95xw8SEenVhUbVfCi9" ^
-     "https://api.twitter.com/2/tweets/search/recent?query=earthquake&max_results=5"
