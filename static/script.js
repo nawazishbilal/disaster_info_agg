@@ -87,7 +87,7 @@ function fetchLatestGDACS() {
 
 }
 
-// ✅ Fix: Fetch alerts based on date range for alerts page
+// Fix: Fetch alerts based on date range for alerts page
 function fetchFilteredGDACS() {
     const startDate = document.getElementById("start-date").value;
     const endDate = document.getElementById("end-date").value;
@@ -156,12 +156,12 @@ function fetchWeather() {
             
             list.innerHTML = weatherDetails;
 
-            // ✅ Extract Latitude & Longitude
+            // Extract Latitude & Longitude
             const lat = data.weather_alerts.latitude;
             const lon = data.weather_alerts.longitude;
 
             if (lat && lon) {
-                loadWindyMap(lat, lon);  // ✅ Call Windy map function
+                loadWindyMap(lat, lon);  // Call Windy map function
             } else {
                 console.error("Invalid coordinates received:", lat, lon);
             }
