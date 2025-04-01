@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Alerts</title>
     <link rel="stylesheet" href="static/style.css">
+    <!-- ✅ Load Leaflet v1.4.0 (Required by Windy API) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"></script>
+
+    <!-- ✅ Load Windy API -->
+    <script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script>
+
+    <script src="/static/script.js" defer></script> <!-- ✅ Your JS file -->
 </head>
 <body>
     <div id="navbar">
@@ -17,13 +25,21 @@
             <a href="/alerts">View Alerts</a>
         </div>
     </div>
-
-    <section>
-        <h2>Get Weather Alerts</h2>
-        <input type="text" id="city" placeholder="Enter city">
-        <button onclick="fetchWeather()">Get Weather</button>
-        <ul id="weather-list"></ul>
-    </section>
+    
+    <div id="weather-container">
+        <div id="weather-info">
+            <h2>Get Weather Alerts</h2>
+            <p>Enter a location to get real-time weather details and a weather map</p>
+            <input type="text" id="city" placeholder="Enter location">
+            <button onclick="fetchWeather()">Get Weather</button>
+    
+            <ul id="weather-list"></ul> <!-- Weather data appears here -->
+        </div>
+    
+        <div id="map-container">
+            <div id="windy-map"></div> <!-- Windy map appears here -->
+        </div>
+    </div>
 
     <script src="static/script.js"></script>
 </body>

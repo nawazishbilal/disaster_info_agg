@@ -92,3 +92,28 @@ body {
         min-width: unset; /* Allow full width */
     }
 }
+
+#weather-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+}
+
+#weather-info {
+    flex: 1; /* Takes available space on the left */
+    max-width: 40%;
+}
+
+#map-container {
+    flex: 1; /* Takes available space on the right */
+    max-width: 55%;
+}
+
+#windy-map {
+    width: 100%; /* Adjust width */
+    height: 400px; /* Adjust height */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}

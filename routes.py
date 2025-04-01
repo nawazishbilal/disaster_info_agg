@@ -237,6 +237,8 @@ def get_weather_alerts():
     # Extract relevant details
     weather_data = {
         "location": location,
+        "latitude": lat,   # ✅ Include coordinates
+        "longitude": lon,  # ✅ Include coordinates
         "temperature": weather_response["main"]["temp"],
         "weather": weather_response["weather"][0]["description"],
         "humidity": weather_response["main"]["humidity"],

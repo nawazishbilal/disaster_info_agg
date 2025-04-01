@@ -3,7 +3,9 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("DOM fully loaded");
-
+    if (window.location.pathname.includes("weather.html")) {
+        loadWindyMap();
+    }
     function waitForElement(selector, callback, interval = 100, attempts = 10) {
         let tries = 0;
         const check = setInterval(() => {
@@ -153,6 +155,16 @@ function fetchWeather() {
             `;
             
             list.innerHTML = weatherDetails;
+
+            // ✅ Extract Latitude & Longitude
+            const lat = data.weather_alerts.latitude;
+            const lon = data.weather_alerts.longitude;
+
+            if (lat && lon) {
+                loadWindyMap(lat, lon);  // ✅ Call Windy map function
+            } else {
+                console.error("Invalid coordinates received:", lat, lon);
+            }
         })
         .catch(error => console.error("Error fetching weather alerts:", error));
 }
@@ -171,4 +183,30 @@ function fetchTweets() {
             });
         })
         .catch(error => console.error("Error fetching tweets:", error));
+}
+
+
+function loadWindyMap(lat, lon) {
+    if (!lat || !lon) {
+        console.error("Invalid coordinates for Windy map:", lat, lon);
+        return;
+    }
+
+    // Create a div for Windy map
+    document.getElementById("windy-map").innerHTML = ""; // Clear previous map
+    const mapDiv = document.createElement("div");
+    mapDiv.id = "windy";
+    mapDiv.style = "width: 100%; height: 500px;";
+    document.getElementById("windy-map").appendChild(mapDiv);
+
+    // Initialize Windy map
+    windyInit({
+        key: "nN8xmM86Z2Kn5Qfb8UOEcXESwnxs9jcZ",
+        lat: lat,
+        lon: lon,
+        zoom: 7,
+    }, function (windyAPI) {
+        const { map } = windyAPI;
+        console.log("Windy map loaded successfully!");
+    });
 }
