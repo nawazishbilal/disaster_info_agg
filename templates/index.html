@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Disaster Information Hub</title>
     <link rel="stylesheet" href="static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
+
+
+
     <div id="navbar">
         <div class="nav-heading">Disaster Alerts</div>
         <div class="nav-links">
@@ -18,7 +22,47 @@
             <a href="/alerts">View Alerts</a>
         </div>
     </div>
-    <ul id="gdacs-list"></ul>
+
+    <header class="hero-section">
+        <div class="hero-content">
+          <h1>Stay Informed. Stay Safe.</h1>
+          <p>Real-time updates and insights into natural disasters around the world.</p>
+          <a class="cta-button" href="/alerts">See Live Alerts</a>
+        </div>
+      </header>
+    
+    <div class="news-section">
+        <div class="news-image">
+          <img src="static/disaster.jpg" alt="Disaster News">
+          <div class="statistics"> 
+            <div class="stat1">
+                <img style="border-radius:17px;" class="alert" src="/static/alert1.jpg"> </img>
+            </div>
+            <div class="stat1">
+                <img class="graph" src="/static/graph.jpg"></img>
+            </div>
+          </div>
+        </div>
+
+        <div class="news-content">
+          <h2>Latest Disaster Alert</h2>
+          
+          <ul id="gdacs-list"></ul>
+      </div>
+
+
+      
+    </div>
+    <footer>
+        <p>🌟 Powered by AI & Real-time Data | &copy; 2025 Disaster Info Hub</p>
+      </footer>
+
+    </div>
+      
+
+      
+      
+      
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             fetchLatestGDACS();

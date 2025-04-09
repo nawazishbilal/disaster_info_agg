@@ -1,6 +1,7 @@
 
 
 
+
 document.addEventListener("DOMContentLoaded", () => {
     console.log("DOM fully loaded");
     if (window.location.pathname.includes("weather.html")) {
@@ -66,7 +67,7 @@ function fetchLatestGDACS() {
             return;
         }
 
-        const latestAlerts = data.gdacs_alerts.slice(0, 10);  // Limit to 10 alerts
+        const latestAlerts = data.gdacs_alerts.slice(0, 4);  // Limit to 10 alerts
         const alertsList = document.getElementById("gdacs-list");
 
         alertsList.innerHTML = ""; // Clear old alerts
@@ -210,3 +211,6 @@ function loadWindyMap(lat, lon) {
         console.log("Windy map loaded successfully!");
     });
 }
+
+
+
