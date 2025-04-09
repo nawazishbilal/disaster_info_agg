@@ -124,19 +124,7 @@ Visit: `http://127.0.0.1:5000/`
 
 ---
 
-## 🤝 Contributing
-
-Pull requests are welcome! For major changes, please open an issue first.
-
----
-
-## 📜 License
-
-[MIT](LICENSE)
-
----
-
 ## 📌 Author
 
-**Developed by [Your Name]**  
-GitHub: [@your-username](https://github.com/your-username)
+**Developed by Nawazish Bilal, Abhi Uranw**  
+GitHub: [@nawazishbilal](https://github.com/nawazishbilal) [@Apps1289](https://github.com/Apps1289)
