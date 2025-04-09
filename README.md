@@ -1,98 +1,142 @@
+# 🌍 Disaster Information Aggregation Web App
 
-# Disaster Information Aggregation using Machine Learning
+A real-time, multi-source disaster data aggregator that provides live alerts, weather reports, earthquake data, and a dynamic weather map interface. Built using **Flask**, **PostgreSQL**, and **JavaScript**, the app integrates several APIs for timely and actionable insights.
 
-This project aims to aggregate and analyze disaster-related information using machine learning techniques. It collects data from various sources, processes it, and provides insights to aid in disaster response and management.
+---
 
-## Features
+## 🔧 Features
 
-- **Data Collection**: Gathers disaster-related data from multiple sources.
-- **Data Processing**: Cleans and structures the collected data for analysis.
-- **Machine Learning Analysis**: Applies machine learning models to identify patterns and insights.
-- **Web Interface**: Provides a user-friendly interface to visualize and interact with the data.
+- 📡 **Real-time Earthquake Data** from USGS API
+- 🌊 **Global Disaster Alerts** via GDACS RSS Feed
+- ☁️ **Live Weather Forecasts** using OpenWeatherMap API
+- 🌪 **Interactive Weather Map** powered by Windy API
+- 🧭 Search-based filtering (by location, disaster type, date)
+- 🗺️ Responsive UI with map and data split view
+- 🌐 Toggle navigation to switch between views
 
-## Requirements
+---
 
-Ensure you have the following installed:
+## 📁 Project Structure
 
-- Python 3.x
-- Flask
-- Python-dotenv
-- Requests
-- Feedparser
-- Flask-SQLAlchemy
-- Psycopg2
-
-You can install the required Python packages using:
-
-```bash
-pip install flask python-dotenv requests feedparser flask_sqlalchemy psycopg2
+```
+📦 disaster-info-aggregator/
+├── app.py
+├── config.py
+├── db.py
+├── init_db.py
+├── models.py
+├── routes.py
+├── templates/
+│   ├── index.html
+│   ├── alerts.html
+│   ├── earthquakes.html
+│   ├── weather.html
+├── static/
+│   ├── script.js
+│   ├── style.css
+├── .env
+└── README.md
 ```
 
-## Setup Instructions
+---
 
-1. **Clone the Repository**:
+## 🔌 APIs Used
 
-   ```bash
-   git clone https://github.com/nawazishbilal/disaster_info_agg.git
-   ```
+| Feature              | API Provider           | Endpoint Type     |
+|---------------------|------------------------|-------------------|
+| Earthquakes         | USGS                   | GeoJSON           |
+| Global Alerts       | GDACS                  | RSS Feed          |
+| Weather Forecast    | OpenWeatherMap         | REST + Geocoding  |
+| Weather Map         | Windy.com              | Embedded JS SDK   |
 
-2. **Navigate to the Project Directory**:
+---
 
-   ```bash
-   cd disaster_info_agg
-   ```
+## ⚙️ Setup Instructions
 
-3. **Set Up Environment Variables**:
+### 1. Clone the Repository
 
-   - Create a `.env` file in the project root directory.
-   - Add necessary environment variables as required by your application.
+```bash
+git clone https://github.com/your-username/disaster-info-aggregator.git
+cd disaster-info-aggregator
+```
 
-4. **Initialize the Database**:
+### 2. Create a Python Virtual Environment
 
-   - Run the `init_db.py` script to set up the database schema:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
 
-     ```bash
-     python init_db.py
-     ```
+### 3. Install Dependencies
 
-5. **Run the Application**:
+```bash
+pip install -r requirements.txt
+```
 
-   ```bash
-   python app.py
-   ```
+### 4. Set Up `.env`
 
-6. **Access the Web Interface**:
+Create a `.env` file and add your credentials:
 
-   - Open your web browser and navigate to the URL displayed in the terminal (e.g., `http://127.0.0.1:5000/`).
+```env
+DATABASE_URL=postgresql://user:password@localhost:5432/disaster_db
+OPENWEATHER_API_KEY=your_openweather_api_key
+WINDY_API_KEY=your_windy_api_key
+```
 
-## Project Structure
+### 5. Initialize Database
 
-- `app.py`: Main application file that starts the Flask server.
-- `config.py`: Configuration settings for the application.
-- `db.py`: Database connection and setup.
-- `models.py`: Defines the database models.
-- `routes.py`: Handles the web routes and API endpoints.
-- `init_db.py`: Initializes the database with the required schema.
-- `twitter_api.py`: Manages interactions with the Twitter API.
-- `static/`: Contains static files like CSS, JavaScript, and images.
-- `templates/`: Contains HTML templates for rendering the web pages.
-- `tweets.csv`: Sample dataset of collected tweets.
-- `test.txt`: Placeholder file for testing purposes.
+```bash
+python init_db.py
+```
 
-## Usage
+### 6. Run the App
 
-- **Navigation**: Use the web interface to navigate between different components of the project.
-- **Data Visualization**: View aggregated data and analysis results through interactive charts and tables.
-- **Customization**: Modify the machine learning models and data sources as needed to fit specific requirements.
+```bash
+flask run
+```
 
-## Contributing
+Visit: `http://127.0.0.1:5000/`
 
-Contributions are welcome! Please fork the repository and submit a pull request with your changes.
+---
 
-## License
+## 🧪 Features by Page
 
-This project is licensed under the MIT License. See the LICENSE file for more details.
+- **Home (`/`)**  
+  View 5 latest high-alert disasters from GDACS
 
-## Acknowledgments
+- **Earthquakes (`/earthquakes`)**  
+  Search and filter USGS earthquake data by location
 
-Special thanks to all contributors and the open-source community for their invaluable support.
+- **Weather (`/weather`)**  
+  Fetch live weather details and view the Windy map
+
+- **Alerts (`/alerts`)**  
+  Filter global disaster alerts by date and disaster type
+
+---
+
+## 🎨 UI Highlights
+
+- Responsive glassmorphism design
+- Sticky floating navbar
+- Weather and map views aligned side-by-side
+- Input validation with user-friendly error prompts
+
+---
+
+## 🤝 Contributing
+
+Pull requests are welcome! For major changes, please open an issue first.
+
+---
+
+## 📜 License
+
+[MIT](LICENSE)
+
+---
+
+## 📌 Author
+
+**Developed by [Your Name]**  
+GitHub: [@your-username](https://github.com/your-username)
