@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disaster Classifier</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-control {
+            font-size: 16px;
+            resize: none;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: #ff512f;
+            background: linear-gradient(to right, #ff512f, #dd2476);
+            border: none;
+            font-size: 18px;
+            padding: 10px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .loading {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .result-card {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 18px;
+            opacity: 0;
+            /* Initially hidden */
+            transform: translateY(-10px);
+            /* Slightly move up */
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        .result-card.show {
+            opacity: 1;
+            /* Fade in effect */
+            transform: translateY(0);
+            /* Move to normal position */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2 class="mb-3">🌍 Disaster Classifier</h2>
+        <p class="text-muted">Enter the text below to check if it's disaster-related.</p>
+
+        <form id="tweetForm">
+            <div class="mb-3">
+                <textarea id="tweet" class="form-control" rows="3" required oninput="autoExpand(this)"
+                    placeholder="Type your tweet here..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100"> Classify</button>
+        </form>
+
+        <!-- Loading animation -->
+        <div class="loading">
+            <div class="spinner-border text-danger" role="status"></div>
+            <p>Classifying text...</p>
+        </div>
+
+        <!-- Result card -->
+        <div id="result" class="result-card"></div>
+    </div>
+
+    <script>
+        function autoExpand(textarea) {
+            textarea.style.height = "auto";
+            textarea.style.height = (textarea.scrollHeight) + "px";
+        }
+
+        document.getElementById("tweetForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            let tweetText = document.getElementById("tweet").value;
+            let resultDiv = document.getElementById("result");
+            let loadingDiv = document.querySelector(".loading");
+
+            // Hide previous result
+            resultDiv.style.display = "none";
+            resultDiv.classList.remove("show"); // Remove animation class
+
+            // Show loading animation
+            loadingDiv.style.display = "block";
+
+            // Send the tweet for classification
+            fetch("/predict", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ tweet: tweetText })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    loadingDiv.style.display = "none"; // Hide loading
+
+                    // Update result text and styling
+                    resultDiv.innerHTML = `<p>${data.label}</p>`;
+                    resultDiv.className = data.label === "Disaster-related"
+                        ? "result-card bg-danger text-white"
+                        : "result-card bg-success text-white";
+
+                    // Show result div first (display: block), then trigger fade-in
+                    resultDiv.style.display = "block";
+
+                    // Use requestAnimationFrame for a smooth fade-in effect
+                    requestAnimationFrame(() => resultDiv.classList.add("show"));
+                })
+                .catch(error => {
+                    loadingDiv.style.display = "none";
+
+                    resultDiv.innerHTML = "<p>Error: Could not classify tweet</p>";
+                    resultDiv.className = "result-card bg-warning text-dark";
+
+                    resultDiv.style.display = "block";
+                    requestAnimationFrame(() => resultDiv.classList.add("show"));
+                });
+        });
+
+    </script>
+
+</body>
+
+</html>
