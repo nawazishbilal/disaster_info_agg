@@ -79,7 +79,7 @@ model.save_model("xgboost_model.json")
 # Flask API for deployment
 app = Flask(__name__)
 
-@app.route('/predict', methods=['POST'])
+@app2.route('/predict', methods=['POST'])
 def predict():
     data = request.json
     if 'text' not in data:
