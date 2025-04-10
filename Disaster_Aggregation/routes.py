@@ -1,9 +1,8 @@
 from flask import Blueprint, request, jsonify, render_template
 from db import db
 from models import DisasterReport
-import requests
-import feedparser
-import os
+import xgboost as xgb
+import requests, feedparser, os, joblib
 from dotenv import load_dotenv
 from twitter_api import fetch_disaster_tweets
 from datetime import datetime
@@ -12,6 +11,15 @@ load_dotenv()  # Load API keys from .env
 
 weather_bp = Blueprint("weather", __name__)
 disaster_bp = Blueprint('disaster_bp', __name__)
+
+MODEL_PATH = "disaster_model.pkl"
+VECTORIZER_PATH = "vectorizer.pkl"
+
+if os.path.exists(MODEL_PATH) and os.path.exists(VECTORIZER_PATH):
+    model = joblib.load(MODEL_PATH)
+    vectorizer = joblib.load(VECTORIZER_PATH)
+else:
+    model, vectorizer = None, None
 
 USGS_API_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query"
 NOMINATIM_API_URL = "https://nominatim.openstreetmap.org/search"
