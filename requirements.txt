@@ -1,4 +1,4 @@
-flask
+flask==2.2.5
 psycopg2
 flask_sqlalchemy
 python-dotenv
@@ -7,3 +7,5 @@ requests
 feedparser
 flask_sqlalchemy
 xgboost
+numpy
+gunicorn
