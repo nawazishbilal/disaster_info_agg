@@ -17,37 +17,37 @@
         }
 
         /* Navbar */
-#navbar {
-    background-color: #1f1f1f;
-    padding: 15px 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    margin-bottom: 30px;
-    width: 95%;
-    top: -20px;
-    margin: 10px;
-    
-}
+        #navbar {
+            background-color: #1f1f1f;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+            width: 95%;
+            top: -20px;
+            margin: 10px;
+            
+        }
 
-.nav-heading {
-    font-size: 24px;
-    font-weight: bold;
-    color: #00bcd4;
-}
+        .nav-heading {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00bcd4;
+        }
 
-.nav-links a {
-    color: #f0f0f0;
-    text-decoration: none;
-    margin-left: 20px;
-    transition: color 0.3s ease;
-}
+        .nav-links a {
+            color: #f0f0f0;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s ease;
+        }
 
-.nav-links a:hover {
-    color: #00bcd4;
-}
+        .nav-links a:hover {
+            color: #00bcd4;
+        }
 
         .container {
             max-width: 600px;
@@ -164,6 +164,7 @@
 
         <!-- Result card -->
         <div id="result" class="result-card"></div>
+        <progress id="confidence-bar" max="100" value="0" style="width: 100%; margin-top: 10px;"></progress>
     </div>
 
     </body>
@@ -199,7 +200,7 @@
                     loadingDiv.style.display = "none"; // Hide loading
 
                     // Update result text and styling
-                    resultDiv.innerHTML = `<p>${data.label}</p>`;
+                    resultDiv.innerHTML = `<p>${data.label}<br><small>Probablity of being Disaster-Related: ${(data.raw_score * 100).toFixed(2)}%</small></p>`;
                     resultDiv.className = data.label === "Disaster-related"
                         ? "result-card bg-danger text-white"
                         : "result-card bg-success text-white";
@@ -209,6 +210,10 @@
 
                     // Use requestAnimationFrame for a smooth fade-in effect
                     requestAnimationFrame(() => resultDiv.classList.add("show"));
+
+                    // Update confidence bar
+                    const bar = document.getElementById("confidence-bar");
+                    if (bar) bar.value = (data.raw_score * 100);
                 })
                 .catch(error => {
                     loadingDiv.style.display = "none";

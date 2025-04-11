@@ -1,0 +1,8 @@
+flask
+psycopg2
+flask_sqlalchemy
+python-dotenv
+sentence-transformers
+requests
+feedparser
+flask_sqlalchemy
