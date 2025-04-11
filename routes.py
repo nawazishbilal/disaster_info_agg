@@ -3,7 +3,7 @@ from db import db
 import numpy as np
 import xgboost as xgb
 from sentence_transformers import SentenceTransformer
-import requests, feedparser, os, joblib
+import requests, feedparser, os
 from dotenv import load_dotenv
 from twitter_api import fetch_disaster_tweets
 from datetime import datetime

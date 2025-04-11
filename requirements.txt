@@ -6,3 +6,4 @@ sentence-transformers
 requests
 feedparser
 flask_sqlalchemy
+xgboost
